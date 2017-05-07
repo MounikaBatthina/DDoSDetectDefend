@@ -1,10 +1,13 @@
+import os
 from django.http import HttpResponse
+from django.template import Context, loader
+
 import dpkt
 from django.shortcuts import render_to_response
 
 
 def index(request):
-    return HttpResponse("<h1>Detect Page</h1>")
+    return HttpResponse("<h1>Detect Page</h1><td><a href='/detect/dt'>Start the detection</a></td>")
 
 def detect_ddos(request):
     counter = 0
@@ -30,9 +33,9 @@ def detect_ddos(request):
         if ip.p == dpkt.ip.IP_PROTO_UDP:
             udpcounter += 1
 
-    print ("Total number of packets in the pcap file: " , counter)
-    print ("Total number of ip packets: " , ipcounter)
-    print ("Total number of tcp packets: " , tcpcounter)
-    print ("Total number of udp packets: " , udpcounter)
-    return HttpResponse("<h1>Detected!</h1>")
+    header = "Total number of packets in the pcap file: "+str(counter)+"<br>Total number of ip packets: " + str(ipcounter)+"<br>Total number of tcp packets: "+str(tcpcounter)+"<br>Total number of udp packets: " + str(udpcounter)
+    return HttpResponse("<h1>Detected!<br>"+header+"</h1>")
 
+
+def redirect(request):
+    return HttpResponse()

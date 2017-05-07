@@ -6,4 +6,6 @@ urlpatterns = [
 
     url(r'^$',views.index, name='index'),
     url(r'^dt/',views.detect_ddos, name='detect_ddos'),
+    url(r'^redirect/', views.redirect, name='redirect'),
+
 ]
